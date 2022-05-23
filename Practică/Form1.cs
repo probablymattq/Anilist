@@ -1,3 +1,5 @@
+using Ganss.Excel;
+
 namespace Practică
 {
     public partial class Form1 : Form
@@ -88,6 +90,71 @@ namespace Practică
             main1.Show();
             pictureBox3.Hide();
             pictureBox2.Show();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            DataAcces db = new DataAcces();
+            List<ExportData> animeListPublic = new List<ExportData>();
+            List<ExportData> animeListPersonal = new List<ExportData>();
+
+            if (OpenedControl == "Main")
+            {
+                var result = MessageBox.Show("Doriti sa exportati lista publica?", "Export in Excel", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    db.GetAnime().ForEach(a =>
+                    {
+                        animeListPublic.Add(new ExportData
+                        {
+                            idanime = a.idanime,
+                            numeanime = a.numeanime,
+                            nrepisoade = a.nrepisoade,
+                            status = a.status,
+                            dataaparitie = a.dataaparitie,
+                            studio = db.GetStudio(a.idstudio),
+                            gen = db.GetGen(a.idgen),
+                            sezon = db.GetSezon(a.idsezon)
+                        }); 
+                    });
+                    ExcelMapper mapper = new ExcelMapper();
+                    var newFile = @"..\..\..\..\ExportPublic.xlsx";
+                    mapper.Save(newFile, animeListPublic, "Sheet", true);
+                    MessageBox.Show("Lista publica a fost exportata in fisier excel");
+
+                }
+
+            }
+            else if (OpenedControl == "UserProfile")
+            {
+                var result = MessageBox.Show("Doriti sa exportati lista personala?", "Export in Excel", MessageBoxButtons.YesNo);
+
+                if(result == DialogResult.Yes)
+                {
+                    var email = db.GetCurrentSession().First().email;
+                    db.GetAnimePersonal2(email).ForEach(a =>
+                    {
+                        animeListPersonal.Add(new ExportData
+                        {
+                            idanime = a.idanime,
+                            numeanime = a.numeanime,
+                            nrepisoade = a.nrepisoade,
+                            status = a.status,
+                            dataaparitie = a.dataaparitie,
+                            studio = db.GetStudio(a.idstudio),
+                            gen = db.GetGen(a.idgen),
+                            sezon = db.GetSezon(a.idsezon)
+                        });
+                    });
+
+                    ExcelMapper mapper = new ExcelMapper();
+                    var newFile = @"..\..\..\..\ExportPersonal.xlsx";
+                    mapper.Save(newFile, animeListPersonal, "Sheet", true);
+                    MessageBox.Show("Lista personala a fost exportata in fisier excel");
+                }
+
+            }
         }
     }
 }
