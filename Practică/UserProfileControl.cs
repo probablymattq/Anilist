@@ -24,45 +24,53 @@ namespace Practică
             DataAcces db = new DataAcces();
             String email = db.GetCurrentSession().First().email;
 
-            var animeCount = db.GetAnimePersonal2(email).Count() * 2;
-
-            for (int j = 0; j < db.GetAnimePersonal2(email).Count() * 2; j++)
+            if (db.GetAnimePersonal2(email).Count() <= 0)
             {
-                if (Controls[j].GetType().ToString() == "System.Windows.Forms.PictureBox")
+                label1.Show();
+            }
+            else
+            {
+                for (int j = 0; j < db.GetAnimePersonal2(email).Count() * 2; j++)
                 {
-                    PictureBox c = (PictureBox)Controls[j];
-                    String image = db.GetAnimePersonal2(email)[j / 2].animeimage;
-                    String namepb = Controls[j].Name.ToString();
-
-                    AnimeData2.Add(new AnimeDataAcces { PictureBoxName = namepb, ClickedAnimeId = db.GetAnimePersonal2(email)[j / 2].idanime });
-                    c.ImageLocation = image;
-                    c.SizeMode = PictureBoxSizeMode.StretchImage;
-                    c.LoadAsync();
-                    Controls[j].Visible = true;
-
-                    Controls[j].Click += new EventHandler(ShowActionSelector);
-
-                } else if (Controls[j].GetType().ToString() == "System.Windows.Forms.Label")
-                {
-                    Label c = (Label)Controls[j];
-                    String name = db.GetAnimePersonal2(email)[j / 2].numeanime;
-
-                    String finalname = "";
-
-                    if (name.Length > 18)
+                    if (Controls[j].GetType().ToString() == "System.Windows.Forms.PictureBox")
                     {
-                        finalname = name.Substring(0, 18) + "\n" + name.Substring(name.Length - (name.Length - 18));
-                    }
-                    else
-                    {
-                        finalname = name;
-                    }
+                        PictureBox c = (PictureBox)Controls[j];
+                        String image = db.GetAnimePersonal2(email)[j / 2].animeimage;
+                        String namepb = Controls[j].Name.ToString();
 
-                    c.Text = finalname;
-                    Controls[j].Visible = true;
+                        AnimeData2.Add(new AnimeDataAcces { PictureBoxName = namepb, ClickedAnimeId = db.GetAnimePersonal2(email)[j / 2].idanime });
+                        c.ImageLocation = image;
+                        c.SizeMode = PictureBoxSizeMode.StretchImage;
+                        c.LoadAsync();
+                        Controls[j].Visible = true;
+
+                        Controls[j].Click += new EventHandler(ShowActionSelector);
+
+                    }
+                    else if (Controls[j].GetType().ToString() == "System.Windows.Forms.Label")
+                    {
+
+                        Label c = (Label)Controls[j];
+                        String name = db.GetAnimePersonal2(email)[j / 2].numeanime;
+
+                        String finalname = "";
+
+                        if (name.Length > 18)
+                        {
+                            finalname = name.Substring(0, 18) + "\n" + name.Substring(name.Length - (name.Length - 18));
+                        }
+                        else
+                        {
+                            finalname = name;
+                        }
+
+                        c.Text = finalname;
+                        Controls[j].Visible = true;
+                    }
                 }
             }
         }
+
 
         private void ShowActionSelector(object sender, EventArgs e)
         {

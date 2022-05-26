@@ -112,7 +112,7 @@ namespace Practică
                             numeanime = a.numeanime,
                             nrepisoade = a.nrepisoade,
                             status = a.status,
-                            dataaparitie = a.dataaparitie,
+                            dataaparitie = a.dataaparitie.Split(' ')[0].ToString(),
                             studio = db.GetStudio(a.idstudio),
                             gen = db.GetGen(a.idgen),
                             sezon = db.GetSezon(a.idsezon)
@@ -141,7 +141,7 @@ namespace Practică
                             numeanime = a.numeanime,
                             nrepisoade = a.nrepisoade,
                             status = a.status,
-                            dataaparitie = a.dataaparitie,
+                            dataaparitie = a.dataaparitie.Split(' ')[0].ToString(),
                             studio = db.GetStudio(a.idstudio),
                             gen = db.GetGen(a.idgen),
                             sezon = db.GetSezon(a.idsezon)

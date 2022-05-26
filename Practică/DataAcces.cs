@@ -51,7 +51,9 @@ namespace Practică
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
             {
-                connection.Query<LoginDB>($"update CURRENTSESSION set username = '{username}', email = '{email}'");
+                connection.Query<LoginDB>($"if exists(select * from CURRENTSESSION)" +
+                    $"update CURRENTSESSION set username = '{username}', email = '{email}'" +
+                    $"else insert into CURRENTSESSION(email, username) values ('{email}', '{username}')");
             }
         }
 
