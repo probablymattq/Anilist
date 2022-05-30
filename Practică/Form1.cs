@@ -67,6 +67,7 @@ namespace Practică
         {
             OpenedControl = "UserProfile";
             userProfileControl1.Show();
+            cafe1.Hide();
             main1.Hide();
             pictureBox2.Hide();
             pictureBox3.Show();
@@ -78,6 +79,7 @@ namespace Practică
             userProfileControl1.Hide();
             pictureBox3.Hide();
             pictureBox2.Show();
+            cafe1.Hide();
 
             DataAcces db = new DataAcces();
             label1.Text = "Current session: " + db.GetCurrentSession().First().username;
@@ -87,6 +89,7 @@ namespace Practică
         {
             OpenedControl = "Main";
             userProfileControl1.Hide();
+            cafe1.Hide();
             main1.Show();
             pictureBox3.Hide();
             pictureBox2.Show();
@@ -97,6 +100,8 @@ namespace Practică
             DataAcces db = new DataAcces();
             List<ExportData> animeListPublic = new List<ExportData>();
             List<ExportData> animeListPersonal = new List<ExportData>();
+            List<CafeData> cafeDataExport = new List<CafeData>();
+
 
             if (OpenedControl == "Main")
             {
@@ -153,8 +158,39 @@ namespace Practică
                     mapper.Save(newFile, animeListPersonal, "Sheet", true);
                     MessageBox.Show("Lista personala a fost exportata in fisier excel");
                 }
-
             }
+            else if (OpenedControl == "Cafe")
+            {
+                var result = MessageBox.Show("Doriti sa exportati datele personale din cafenea?", "Export in Excel", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    var email = db.GetCurrentSession().First().email;
+                    db.GetCafeData(email).ForEach(a =>
+                    {
+                        cafeDataExport.Add(new CafeData
+                        {
+                            email = a.email,
+                            felulintai = a.felulintai,
+                            feluldoi = a.feluldoi,
+                            desert = a.desert,
+                        });
+                    });
+
+                    ExcelMapper mapper = new ExcelMapper();
+                    var newFile = @"..\..\..\..\ExportCafe.xlsx";
+                    mapper.Save(newFile, cafeDataExport, "Sheet", true);
+                    MessageBox.Show("Datele personale din cafenea au fost exportate in fisier excel");
+                }
+            }
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            OpenedControl = "Cafe";
+            cafe1.Show();
+            main1.Hide();
+            userProfileControl1.Hide();
         }
     }
 }

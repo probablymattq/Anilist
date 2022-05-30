@@ -104,13 +104,13 @@ namespace Practică
         }
 
         public void InsertInPersonal(int idanime, string emailuser, string numeanime, int nrepisoade, string status, string dataaparitie, int idstudio, int idgen, int idsezon, string animeimage)
-         {
-             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
-             {
-                 connection.Query<AnimePersonal>($"insert into ANIMEDATAPERSONAL (idanime, email_user, numeanime, nrepisoade, status, dataaparitie, idstudio, idgen, idsezon, animeimage) " +
-                     $"VALUES ('{idanime}', '{emailuser}', '{numeanime}', '{nrepisoade}', '{status}', '{dataaparitie}', '{idstudio}', '{idgen}', '{idsezon}', '{animeimage}')");
-             }
-         }
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
+            {
+                connection.Query<AnimePersonal>($"insert into ANIMEDATAPERSONAL (idanime, email_user, numeanime, nrepisoade, status, dataaparitie, idstudio, idgen, idsezon, animeimage) " +
+                    $"VALUES ('{idanime}', '{emailuser}', '{numeanime}', '{nrepisoade}', '{status}', '{dataaparitie}', '{idstudio}', '{idgen}', '{idsezon}', '{animeimage}')");
+            }
+        }
 
         public void RemoveFromPersonal(int idanime)
         {
@@ -160,6 +160,41 @@ namespace Practică
             {
                 var gen = connection.Query<gen>($"select numegen from GEN where idgen = '{idgen}'").ToList();
                 return gen.First().numegen;
+            }
+        }
+
+        public void InsertCafe(string email, string principal, string secundar, string desert)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
+            {
+                connection.Query<CafeData>($"insert into CAFEDATA (email,  felulintai, feluldoi, desert)" +
+                    $"VALUES('{email}', '{principal}', '{secundar}', '{desert}')");
+            }
+        }
+
+        public List<CafeData> GetCafeData(string email)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
+            {
+                var output = connection.Query<CafeData>($"select * from CAFEDATA where email = '{email}'").ToList();
+                return output;
+            }
+        }
+
+        public void DeleteCafeData(string email)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
+            {
+                connection.Query<CafeData>($"delete from CAFEDATA where email = '{email}'");
+            }
+        }
+
+        public void UpdateCafeData(string email, string principal, string secundar, string desert)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AnilistDB")))
+            {
+                connection.Query<CafeData>($"update CAFEDATA set felulintai = '{principal}', feluldoi = '{secundar}'," +
+                    $" desert = '{desert}' where email = '{email}'");
             }
         }
     }

@@ -2,11 +2,16 @@ CREATE DATABASE AnilistCSharp;
 USE AnilistCSharp;
 
 
+CREATE TABLE CAFEDATA(
+email varchar(50) not null,
+felulintai varchar(30) not null,
+feluldoi varchar(30) not null,
+desert varchar(100) not null);
+
 CREATE TABLE LOGINDATA(
 email varchar(50) not null primary key,
 username varchar(30) not null,
 pass varchar(30) not null);
-
 
 CREATE TABLE CURRENTSESSION(
 email varchar(50) not null primary key, 
