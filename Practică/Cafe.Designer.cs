@@ -100,6 +100,7 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Închide";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             this.label3.MouseEnter += new System.EventHandler(this.label3_MouseEnter);
             this.label3.MouseLeave += new System.EventHandler(this.label3_MouseLeave);
             // 
@@ -137,7 +138,7 @@
             this.radioButton4.Size = new System.Drawing.Size(61, 19);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Zeamă";
+            this.radioButton4.Text = "Zeama";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
@@ -148,7 +149,7 @@
             this.radioButton3.Size = new System.Drawing.Size(48, 19);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Borș";
+            this.radioButton3.Text = "Bors";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -159,7 +160,7 @@
             this.radioButton2.Size = new System.Drawing.Size(51, 19);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Supă";
+            this.radioButton2.Text = "Supa";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
@@ -170,7 +171,7 @@
             this.radioButton1.Size = new System.Drawing.Size(60, 19);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Ciorbă";
+            this.radioButton1.Text = "Ciorba";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -194,7 +195,7 @@
             this.radioButton6.Size = new System.Drawing.Size(53, 19);
             this.radioButton6.TabIndex = 2;
             this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Pește";
+            this.radioButton6.Text = "Peste";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // radioButton7
@@ -249,7 +250,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(72, 19);
             this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Dulceață";
+            this.checkBox2.Text = "Dulceata";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox1

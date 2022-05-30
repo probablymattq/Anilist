@@ -165,18 +165,18 @@ namespace Practică
             #region OptiuniMultiple
             if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == false)
             {
-                desertFinal = checkBox1.Text + " și " + checkBox2.Text;
+                desertFinal = checkBox1.Text + " si " + checkBox2.Text;
             }
             else if (checkBox1.Checked == true && checkBox2.Checked == false && checkBox3.Checked == true)
             {
-                desertFinal = checkBox1.Text + " și " + checkBox3.Text;
+                desertFinal = checkBox1.Text + " si " + checkBox3.Text;
             }
             else if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == true)
             {
-                desertFinal = checkBox1.Text + ", " + checkBox2.Text + " și " + checkBox3.Text;
+                desertFinal = checkBox1.Text + ", " + checkBox2.Text + " si " + checkBox3.Text;
             } else if (checkBox1.Checked == false && checkBox2.Checked == true && checkBox3.Checked == true)
             {
-                desertFinal = checkBox2.Text + " și " + checkBox3.Text;
+                desertFinal = checkBox2.Text + " si " + checkBox3.Text;
             }
             #endregion
 
@@ -290,12 +290,17 @@ namespace Practică
             if (db.GetCafeData(email).Count > 0)
             {
 
-                MessageBox.Show("Comanda dvs din baza de date: " + Environment.NewLine + "Felul intai: " + cafeData.felulintai
+                MessageBox.Show("Comanda dvs din baza de date: " + Environment.NewLine + Environment.NewLine + "Felul intai: " + cafeData.felulintai
                     + Environment.NewLine + "Felul doi: " + cafeData.feluldoi + Environment.NewLine + "Desert: " + cafeData.desert);
             } else
             {
                 MessageBox.Show("In baza de date nu este prezenta o comanda a dvs");
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

@@ -189,7 +189,6 @@ namespace Practică
         {
             OpenedControl = "Cafe";
             cafe1.Show();
-            main1.Hide();
             userProfileControl1.Hide();
         }
     }
